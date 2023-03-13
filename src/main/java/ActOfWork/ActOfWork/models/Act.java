@@ -50,4 +50,12 @@ public class Act {
     public void setDate(int date) {
         this.date = date;
     }
+
+    public Act() {
+    }
+
+    public Act(String name, String job) {
+        this.name = name;
+        this.job = job;
+    }
 }

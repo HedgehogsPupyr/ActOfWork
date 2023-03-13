@@ -11,18 +11,13 @@
 <body>
     <header th:insert="blocks/header :: header"> </header>
 
-    <div>
-    <h1> Актик</h1>
-    </div>
-    <div>
-        <div th:each="el : ${acts}" class="alert alert-info mt-2">
+        <div th:each="el : ${acts}" class=" alert alert-info mt-2">
             <h3 th:text="${el.name}"/>
             <h3 th:text="${el.job}"/>
-            <a th:href="/act/' + ${el.id}"> Ссылочка</a>
+            <a th:href="'/act/'+${el.id}" class="btn btn-warning"> Ссылочка</a>
         </div>
 
-    </div>
-    </div>
+
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div th:insert="blocks/footer :: footer"> </div>
