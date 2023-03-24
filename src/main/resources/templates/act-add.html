@@ -11,16 +11,110 @@
 <body>
 <header th:insert="blocks/header :: header"> </header>
 
-<h1> Добавление акта</h1>
+<div class="container">
+    <div class="px-4 pt-5 my-5 text-center border-bottom">
+        <h1 class="display-5 fw-bold"> Добавление акта </h1>
+    </div>
 
-<form action="/act/add" method="post">
-    <input type="text" name="name" placeholder="Сюда акт писать" class="form-control">
-    <input type="text" name="job" placeholder="Сюда работы" class="form-control">
+    <form action="/act/add" method="post" enctype="multipart/form-data">
+        <div>
+            <div>
+                <p>Объект капитального строительства: </p>
+                <p> <textarea class="form-control" aria-label="With textarea" name="object" placeholder="Наименование проектной документации, почтовый или строителный адрес объекта капитального строительства"></textarea> </p>
+                <p>Застройщик(технический заказчик, уксплуатирующая организация или региональный оператор): </p>
+                <p> <textarea class="form-control" aria-label="With textarea" name="customer" placeholder="ОГРН, ИНН место нахождения юр.лица и пр."></textarea> </p>
+                <p> Лицо, осуществляющее строительство: </p>
+                <p> <textarea class="form-control" aria-label="With textarea" name="builder" placeholder="ОГРН, ИНН место нахождения юр.лица и пр. "></textarea></p>
+                <p> Лицо, осуществляющее подготовку проектной документации: </p>
+                <p> <textarea class="form-control" aria-label="With textarea" name="architect" placeholder="ОГРН, ИНН место нахождения юр.лица и пр. "></textarea></p>
+            </div>
 
-    <button type="submit" class="btn btn-success"> Отправляем</button>
 
-</form>
+            <div class="px-4 pt-5 my-5 text-center border-bottom">
+                <h2 class="display-5 fw-bold"> АКТ </h2>
+                <h2 class="display-6 fw-bold"> освидетельствования скрытых работ</h2>
+            </div>
+            <div>
+                <span> № <input type="text" name="number_of_act" placeholder="Введите номер акта"></span>  <span><input type="date" name="date"  ></span>
 
+            </div>
+
+            <div>
+                <p>Представитель застройщика (технического заказчика, эксплуатирующей организаци или регионального оператора) по вопростам строительного контроля: </p>
+                    <p><textarea class="form-control" aria-label="With textarea" name="technical_supervision"  placeholder="Должность, фамилия, инициалы, идентификационный номер в нац. реестре специалистов в области строительства"></textarea></p>
+            </div>
+
+            <div>
+                <p> Представитель лица, осуществляющего строительство <textarea class="form-control" aria-label="With textarea" name="builder_face" placeholder="Должность, фамилия, инициалы реквизиты распорядительного документа, подтверждающие полномочия"></textarea></p>
+            </div>
+
+            <div>
+                <p> Представитель лица, осуществляющего строительство, по вопросам строительного контроля (специалист по организации строительства)
+                    <textarea class="form-control" aria-label="With textarea" name="builder_supervision" placeholder="Должность, фамилия, инициалы реквизиты распорядительного документа, подтверждающие полномочия,идентификационный номер в нац. реестре специалистов в области строительства "></textarea></p>
+            </div>
+
+            <div>
+                <p> Представитель лица, осуществляющего подготовку проектной документации <textarea class="form-control" aria-label="With textarea" name="architect_face" placeholder="Должность, фамилия, инициалы реквизиты распорядительного документа, подтверждающие полномочия" ></textarea></p>
+            </div>
+
+            <div>
+                <p> Представитель лица, осуществляющего строительства выполнившего работы, подлежащие освидетельствованию
+                    <textarea class="form-control" aria-label="With textarea" name="builder_stroy"  placeholder="Должность, фамилия, инициалы реквизиты распорядительного документа, подтверждающие полномочия "></textarea></p>
+            </div>
+
+            <div>
+                <p> а так же иные предствители лиц, учавствующих в освидетельствовании <textarea class="form-control" aria-label="With textarea" name="another_face" placeholder="Должность, фамилия, инициалы реквизиты распорядительного документа, подтверждающие полномочия"></textarea></p>
+            </div>
+            <div>
+                <p> произвели осмотр работ, выполненых <input type="text" name="builder_short" placeholder="наименование лица осуществляющего строительство, выполнившего работы"></p>
+            </div>
+
+            <div>
+                <p> <b> и составили настоящий акт о нижеследующем:</b></p>
+                <p> 1. К освидетельствованию предъявлены следующие работы:<input type="text" name="job" placeholder="наименование скрытых работ"></p>
+                <p> 2. Работы выполнены по проектной документации: <input type="text" name="project" placeholder=" номер, другие реквизиты чертежа и п.р."></p>
+                <p> 3. При выполнении работ применены: <textarea class="form-control" aria-label="With textarea" name="material" placeholder="наименование строительных материалов, изделий, сертификатов и п.р."></textarea></p></з>
+                <p> 4. Предъявлены документы, подтверждающие соответствие работ предъявляемым к ним требованиям <textarea class="form-control" aria-label="With textarea"
+                            name="docks" placeholder="исполнительные схемы, и чертежи, результаты экспертиз, обследований и пр"></textarea></p>
+                <p> 5. Даты: <p> начала работ: <input type="date" name="date_start"></p>
+                                 <p> окончание работ: <input type="date" name="date_end"></p>
+                </p>
+                <p> 6. Работы выполнены  в соответствии с : <textarea class="form-control" aria-label="With textarea" name="docks_project" placeholder="наименования и структурные едитицы тех.регламентовб иных нормативно-правовых актовб раздеры РД и пр."></textarea></p>
+                <p> 7. Разрешается производство последующих работ по: <textarea class="form-control" aria-label="With textarea" name="next_work" placeholder="наименование работ, конструкций, участков инженерных сетей"></textarea></p>
+            </div>
+
+            <div>
+                Дополнительные сведения:
+
+                <p> Акт составлен в :  <input type="text"> экземплярах </p>
+                <p> Приложения : </p>
+                <p> Согласно п.3,4</p>
+            </div>
+
+            <div>
+                <p> Представитель застройщика (технического заказчика, эксплуатирующей организации или регионального оператора) по вопросам строительного контроля:</p>
+                <p><input type="text" name="technical_supervision_name" placeholder="ФИО" class="form-control" ></p>
+
+                <p> Предсавитель лица, осуществляющего строительство:</p>
+                <p><input type="text" name="builder_face_name" placeholder="ФИО" class="form-control" ></p>
+
+                <p> Представитель лица, осуществляющего строительство, по вопросам строительного контроля (специалист по организации строительства):</p>
+                <p><input type="text" name="builder_supervision_name" placeholder="ФИО" class="form-control" ></p>
+
+                <p> Представитель лица, осуществляющего подготовку проектной документации:</p>
+                <p><input type="text" name="architect_face_name" placeholder="ФИО" class="form-control" ></p>
+
+                <p> Представитель лица, осуществляющего строительство, выполнившего работы, подлежащие освидетельствованию:</p>
+                <p><input type="text" name="builder_stroy_name" placeholder="ФИО" class="form-control" ></p>
+
+                <p> Представители иных лиц:</p>
+                <p><input type="text" name="another_face_name1" placeholder="ФИО" class="form-control" ></p>
+                <p><input type="text" name="another_face_name2" placeholder="ФИО" class="form-control" ></p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success"> Отправляем</button>
+    </form>
+</div>
 
 <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div th:insert="blocks/footer :: footer"> </div>

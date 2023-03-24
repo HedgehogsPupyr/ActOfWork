@@ -33,8 +33,23 @@ public class ActController {
     }
 
     @PostMapping("/act/add")
-    public String ActPostAdd ( @RequestParam  String name, @RequestParam String job, Model model) {
-        Act act = new Act (name, job);
+    public String ActPostAdd ( @RequestParam String object, @RequestParam String customer,@RequestParam String builder,
+                               @RequestParam String architect, @RequestParam int number_of_act, @RequestParam String date,
+                               @RequestParam String technical_supervision, @RequestParam String builder_face,
+                               @RequestParam String builder_supervision, @RequestParam String architect_face,
+                               @RequestParam String builder_stroy, @RequestParam String another_face, @RequestParam String builder_short,
+                               @RequestParam String job, @RequestParam String project, @RequestParam String material,
+                               @RequestParam String docks, @RequestParam String date_start, @RequestParam String date_end,
+                               @RequestParam String docks_project,@RequestParam String next_work,
+                               @RequestParam String technical_supervision_name, @RequestParam String builder_face_name,
+                               @RequestParam String builder_supervision_name,@RequestParam String architect_face_name,
+                               @RequestParam String builder_stroy_name,@RequestParam  String another_face_name1,
+                               @RequestParam String another_face_name2, Model model) {
+
+        Act act = new Act (object,customer, builder, architect, number_of_act, date, technical_supervision, builder_face,
+                builder_supervision, architect_face, builder_stroy, another_face, builder_short, job, project, material,
+                docks, date_start, date_end, docks_project, next_work, technical_supervision_name, builder_face_name,
+                builder_supervision_name, architect_face_name,  builder_stroy_name, another_face_name1, another_face_name2);
         actRepository.save(act);
 
         return "redirect:/act";
@@ -68,7 +83,7 @@ public class ActController {
     @PostMapping("/act/{id}/edit")
     public String ActPostUpdate ( @PathVariable(value = "id") long id, @RequestParam  String name, @RequestParam String job, Model model) {
         Act act = actRepository.findById(id).orElseThrow();
-        act.setName(name);
+        act.setAnother_face(name);
         act.setJob(job);
         actRepository.save(act);
         return "redirect:/act";
