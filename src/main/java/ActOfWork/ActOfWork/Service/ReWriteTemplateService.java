@@ -1,37 +1,32 @@
-package ActOfWork.ActOfWork.controller;
+package ActOfWork.ActOfWork.Service;
 
 
 import ActOfWork.ActOfWork.models.Act;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 
 
 
-public class ReWriteTemplateController {
+public class ReWriteTemplateService {
     private static final String DIRECTORY = "/Users/igogor/Desktop/Java/PDF";
-    private static final String DEFAULT_FILE_NAME = "AOSR.xlsx";
+    private static final String DEFAULT_FILE_NAME = "Template.xlsx";
 
-    public void  rewRiteFile (ArrayList<Act> templ) throws IOException {
+    public byte[]  rewRiteFile (ArrayList<Act> templ) throws IOException {
 
 
-        File file = new File("/Users/igogor/Desktop/Java/PDF/AOSR.xlsx");
+        File file = new File("/Users/igogor/Desktop/Java/PDF/Template.xlsx");
         // Read XSL file
     FileInputStream inputStream = new FileInputStream(file);
 
         // Get the workbook instance for XLS file
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+
 
         // Get first sheet from the workbook
         XSSFSheet sheet = workbook.getSheetAt(0);
@@ -125,10 +120,16 @@ public class ReWriteTemplateController {
             }
         inputStream.close();
 
-        // Write File
-        FileOutputStream out = new FileOutputStream(file);
-        workbook.write(out);
-        out.close();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try {
+            workbook.write(bos);
+        } finally {
+            bos.close();
+        }
+        byte[] bytes = bos.toByteArray();
+
+
+        return bytes;
 
     }
 
