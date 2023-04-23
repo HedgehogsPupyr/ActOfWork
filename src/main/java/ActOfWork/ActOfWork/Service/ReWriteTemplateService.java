@@ -14,11 +14,8 @@ import java.util.ArrayList;
 
 
 public class ReWriteTemplateService {
-    private static final String DIRECTORY = "/Users/igogor/Desktop/Java/PDF";
-    private static final String DEFAULT_FILE_NAME = "Template.xlsx";
 
     public byte[]  rewRiteFile (ArrayList<Act> templ) throws IOException {
-
 
         File file = new File("/Users/igogor/Desktop/Java/PDF/Template.xlsx");
         // Read XSL file
@@ -26,7 +23,7 @@ public class ReWriteTemplateService {
 
         // Get the workbook instance for XLS file
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-
+        inputStream.close();
 
         // Get first sheet from the workbook
         XSSFSheet sheet = workbook.getSheetAt(0);
@@ -118,7 +115,7 @@ public class ReWriteTemplateService {
 
 
             }
-        inputStream.close();
+
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try {

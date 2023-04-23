@@ -4,10 +4,16 @@ package ActOfWork.ActOfWork.controller;
 import ActOfWork.ActOfWork.Service.ReWriteTemplateService;
 import ActOfWork.ActOfWork.models.Act;
 import ActOfWork.ActOfWork.rep.ActRepository;
-import org.apache.poi.util.IOUtils;
+
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,35 +26,33 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
-
-
 @Controller
 public class RewriteAndSaveController {
     @Autowired
     private ActRepository actRepository;
 
-
-
-    private static final String DIRECTORY = "/Users/igogor/Desktop/Java/PDF";
-    private static final String DEFAULT_FILE_NAME = "Template.xlsx";
+    private static final String DEFAULT_FILE_NAME = "Result.xlsx";
     private ReWriteTemplateService changesTempl = new ReWriteTemplateService();
 
 
+    @GetMapping(value = "/act/{id}/download2", produces = MediaType.APPLICATION_CBOR_VALUE)
 
-    @GetMapping(value = "/act/{id}/download2", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-
-    public @ResponseBody byte[] getFile( @RequestParam(defaultValue = DEFAULT_FILE_NAME) String fileName,
-                                         @PathVariable(value = "id") long id, Model model) throws IOException {
+    public ResponseEntity<byte[]> getFile(@PathVariable(value = "id") long id, Model model) throws IOException {
         Optional<Act> act = actRepository.findById(id);
         ArrayList<Act> res = new ArrayList<>();
         act.ifPresent(res::add);
         changesTempl.rewRiteFile(res);
 
-        InputStream in = getClass().getResourceAsStream("/Users/igogor/Desktop/Java/PDF/Template.xlsx");
-        return IOUtils.toByteArray(in);
-    }
+        FileSystemResource fsr = new FileSystemResource("/Users/igogor/Desktop/Java/PDF/Result.xlsx");
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename={id}.xlsx" ));
+
+        return new ResponseEntity<>(
+                IOUtils.toByteArray(fsr.getInputStream()),
+                responseHeaders,
+                HttpStatus.OK
+        );
 
     }
-
-
+}
 

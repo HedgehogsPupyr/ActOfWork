@@ -6,6 +6,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Act {
+    public Act(String object, String customer, String builder, String architect) {
+    }
+
     @Override
     public String toString() {
         return "Act{" +
