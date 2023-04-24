@@ -41,14 +41,12 @@ public class RewriteAndSaveController {
         Optional<Act> act = actRepository.findById(id);
         ArrayList<Act> res = new ArrayList<>();
         act.ifPresent(res::add);
-        changesTempl.rewRiteFile(res);
-
-        FileSystemResource fsr = new FileSystemResource("/Users/igogor/Desktop/Java/PDF/Result.xlsx");
+        byte[] result = changesTempl.rewRiteFile(res);
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename={id}.xlsx" ));
+        responseHeaders.set(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s.xlsx",id));
 
         return new ResponseEntity<>(
-                IOUtils.toByteArray(fsr.getInputStream()),
+                result,
                 responseHeaders,
                 HttpStatus.OK
         );
