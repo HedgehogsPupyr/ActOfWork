@@ -19,7 +19,6 @@ public class MainController {
     @GetMapping("/")
     public String home (Model model) {
         Iterable <ObjectOfBuilder> objects = objectOfBuilderRepository.findAll();
-
         model.addAttribute("objects", objects);
         return "home";
 
