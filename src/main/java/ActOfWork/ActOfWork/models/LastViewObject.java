@@ -3,6 +3,7 @@ package ActOfWork.ActOfWork.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class LastViewObject {
@@ -11,28 +12,20 @@ public class LastViewObject {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToMany
+    @JoinColumn (name = "building_id")
+    private Set<ObjectOfBuilder> buildingId;
 
-    private Date inActViews;
-
-    private Date lastViews;
-
-    public LastViewObject () {
-
-    }
-
-    public LastViewObject(Long id, Date inActViews, Date lastViews) {
+    public LastViewObject(Long id, Set<ObjectOfBuilder> buildingId) {
         this.id = id;
-        this.inActViews = inActViews;
-        this.lastViews = lastViews;
+        this.buildingId = buildingId;
     }
 
-    @Override
-    public String toString() {
-        return "LastViewObject{" +
-                "id=" + id +
-                ", inActViews=" + inActViews +
-                ", lastViews=" + lastViews +
-                '}';
+    public LastViewObject(Set<ObjectOfBuilder> buildingId) {
+        this.buildingId = buildingId;
+    }
+
+    public LastViewObject() {
     }
 
     public Long getId() {
@@ -43,19 +36,11 @@ public class LastViewObject {
         this.id = id;
     }
 
-    public Date getInActViews() {
-        return inActViews;
+    public Set<ObjectOfBuilder> getBuildingId() {
+        return buildingId;
     }
 
-    public void setInActViews(Date inActViews) {
-        this.inActViews = inActViews;
-    }
-
-    public Date getLastViews() {
-        return lastViews;
-    }
-
-    public void setLastViews(Date lastViews) {
-        this.lastViews = lastViews;
+    public void setBuildingId(Set<ObjectOfBuilder> buildingId) {
+        this.buildingId = buildingId;
     }
 }

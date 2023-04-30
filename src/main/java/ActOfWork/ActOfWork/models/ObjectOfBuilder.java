@@ -1,10 +1,7 @@
 package ActOfWork.ActOfWork.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class ObjectOfBuilder {
@@ -13,11 +10,24 @@ public class ObjectOfBuilder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String object, customer, builder, architect;
-
-    public ObjectOfBuilder() {
-    }
+    @ManyToOne
+    @JoinColumn (name = "building_id", insertable = false, updatable = false)
+    private LastViewObject lastViewObject;
 
     public ObjectOfBuilder(String object, String customer, String builder, String architect) {
+    }
+
+    public ObjectOfBuilder(Long id, String object, String customer, String builder, String architect, LastViewObject lastViewObject) {
+        this.id = id;
+        this.object = object;
+        this.customer = customer;
+        this.builder = builder;
+        this.architect = architect;
+        this.lastViewObject = lastViewObject;
+    }
+
+    public ObjectOfBuilder(Long id, String object, String customer, String builder, String architect) {
+        this.id = id;
         this.object = object;
         this.customer = customer;
         this.builder = builder;
@@ -26,12 +36,13 @@ public class ObjectOfBuilder {
 
     @Override
     public String toString() {
-        return "Object{" +
+        return "ObjectOfBuilder{" +
                 "id=" + id +
                 ", object='" + object + '\'' +
                 ", customer='" + customer + '\'' +
                 ", builder='" + builder + '\'' +
                 ", architect='" + architect + '\'' +
+                ", lastViewObject=" + lastViewObject +
                 '}';
     }
 
@@ -73,5 +84,13 @@ public class ObjectOfBuilder {
 
     public void setArchitect(String architect) {
         this.architect = architect;
+    }
+
+    public LastViewObject getLastViewObject() {
+        return lastViewObject;
+    }
+
+    public void setLastViewObject(LastViewObject lastViewObject) {
+        this.lastViewObject = lastViewObject;
     }
 }
