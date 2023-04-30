@@ -17,11 +17,10 @@
 
 
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
-            <div  class="col d-flex flex-column align-items-start gap-2">
+        <div  class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+            <div th:each="el : ${history}" class="col d-flex flex-column align-items-start gap-2">
                 <h3 class="fw-bold">Последний просматриваемый объект</h3>
-                <div th:each="el : ${history}" class="col d-flex flex-column gap-2">
-                    <h3 th:text = "${el.buildingId}" />
+                <p th:text="${el.object}" class="text-muted"/>
                 <a href="/objectOfBuilder" class="btn btn-primary btn-lg">Подробнее</a>
             </div>
 

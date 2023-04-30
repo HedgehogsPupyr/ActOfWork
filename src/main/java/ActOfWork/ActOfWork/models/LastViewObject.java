@@ -2,8 +2,8 @@ package ActOfWork.ActOfWork.models;
 
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class LastViewObject {
@@ -12,20 +12,15 @@ public class LastViewObject {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn (name = "building_id")
-    private Set<ObjectOfBuilder> buildingId;
-
-    public LastViewObject(Long id, Set<ObjectOfBuilder> buildingId) {
-        this.id = id;
-        this.buildingId = buildingId;
-    }
-
-    public LastViewObject(Set<ObjectOfBuilder> buildingId) {
-        this.buildingId = buildingId;
-    }
+    private ObjectOfBuilder objectOfBuilders;
 
     public LastViewObject() {
+    }
+
+    public LastViewObject(ObjectOfBuilder objectOfBuilders) {
+        this.objectOfBuilders = objectOfBuilders;
     }
 
     public Long getId() {
@@ -36,11 +31,8 @@ public class LastViewObject {
         this.id = id;
     }
 
-    public Set<ObjectOfBuilder> getBuildingId() {
-        return buildingId;
+    public ObjectOfBuilder getObjectOfBuilders() {
+        return objectOfBuilders;
     }
 
-    public void setBuildingId(Set<ObjectOfBuilder> buildingId) {
-        this.buildingId = buildingId;
-    }
 }

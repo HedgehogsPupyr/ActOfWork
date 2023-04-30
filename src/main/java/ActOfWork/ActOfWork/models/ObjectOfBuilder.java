@@ -10,11 +10,12 @@ public class ObjectOfBuilder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String object, customer, builder, architect;
-    @ManyToOne
-    @JoinColumn (name = "building_id", insertable = false, updatable = false)
-    private LastViewObject lastViewObject;
+
 
     public ObjectOfBuilder(String object, String customer, String builder, String architect) {
+    }
+
+    public ObjectOfBuilder() {
     }
 
     public ObjectOfBuilder(Long id, String object, String customer, String builder, String architect, LastViewObject lastViewObject) {
@@ -23,7 +24,7 @@ public class ObjectOfBuilder {
         this.customer = customer;
         this.builder = builder;
         this.architect = architect;
-        this.lastViewObject = lastViewObject;
+
     }
 
     public ObjectOfBuilder(Long id, String object, String customer, String builder, String architect) {
@@ -42,7 +43,6 @@ public class ObjectOfBuilder {
                 ", customer='" + customer + '\'' +
                 ", builder='" + builder + '\'' +
                 ", architect='" + architect + '\'' +
-                ", lastViewObject=" + lastViewObject +
                 '}';
     }
 
@@ -86,11 +86,4 @@ public class ObjectOfBuilder {
         this.architect = architect;
     }
 
-    public LastViewObject getLastViewObject() {
-        return lastViewObject;
-    }
-
-    public void setLastViewObject(LastViewObject lastViewObject) {
-        this.lastViewObject = lastViewObject;
-    }
 }

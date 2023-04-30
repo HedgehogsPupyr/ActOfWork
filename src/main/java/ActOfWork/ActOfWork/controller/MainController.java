@@ -1,7 +1,6 @@
 package ActOfWork.ActOfWork.controller;
 
 
-import ActOfWork.ActOfWork.models.Act;
 import ActOfWork.ActOfWork.models.LastViewObject;
 import ActOfWork.ActOfWork.models.ObjectOfBuilder;
 import ActOfWork.ActOfWork.rep.LastViewObjectRepository;
@@ -10,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -27,14 +25,15 @@ public class MainController {
     private LastViewObjectRepository lastViewObjectRepository;
 
     @GetMapping("/")
-    public String home (@PathVariable(value = "id") long id, Model model) {
+    public String home ( Model model) {
         Iterable <ObjectOfBuilder> objects = objectOfBuilderRepository.findAll();
-        Optional<LastViewObject> lastViewObjects = lastViewObjectRepository.findById(id);
+        List<LastViewObject> lastViewObjects = lastViewObjectRepository.findAll();
 
-        ArrayList<LastViewObject> lvo = new ArrayList<>();
-        lastViewObjects.ifPresent(lvo::add);
+        var asd= lastViewObjects.get(0);
 
-        model.addAttribute("history", lvo);
+
+        ObjectOfBuilder objectOfBuilders = asd.getObjectOfBuilders();
+        model.addAttribute("history", List.of(objectOfBuilders));
         model.addAttribute("objects", objects);
         return "home";
 

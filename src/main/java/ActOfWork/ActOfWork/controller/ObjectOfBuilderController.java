@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -33,13 +34,13 @@ public class ObjectOfBuilderController {
      return "objectOfBuilder";
     }
 
-    @PostMapping("/objectOfBuilder/{id}")
-    public String LastViewObjectAdd (@RequestParam Long id, @RequestParam Set <ObjectOfBuilder> builderId, Model model) {
-
-        LastViewObject lvo = new LastViewObject(id, builderId);
-        lastViewObjectRepository.save(lvo);
-        return "redirect:/objectOfBuilder/{id}";
-    }
+//    @PostMapping("/objectOfBuilder/{id}")
+//    public String LastViewObjectAdd (@RequestParam Long id, @RequestParam LinkStyle<ObjectOfBuilder> builderId, Model model) {
+//
+//        LastViewObject lvo = new LastViewObject(id, builderId);
+//        lastViewObjectRepository.save(lvo);
+//        return "redirect:/objectOfBuilder/{id}";
+//    }
 
 
 
@@ -49,11 +50,16 @@ public class ObjectOfBuilderController {
             return "redirect:/home";
         }
 
+        LastViewObject lastViewObject = new LastViewObject();
+        ObjectOfBuilder obj = new ObjectOfBuilder();
 
-        Optional<ObjectOfBuilder> objects = objectOfBuilderRepository.findById(id);
-        ArrayList<ObjectOfBuilder> res = new ArrayList<>();
-        objects.ifPresent(res::add);
-        model.addAttribute("objects", res);
+
+
+//        Optional<ObjectOfBuilder> objects = objectOfBuilderRepository.findById(id);
+//        lastViewObject.setObjectOfBuilders(objects);
+//        ArrayList<ObjectOfBuilder> res = new ArrayList<>();
+//        objects.ifPresent(res::add);
+//        model.addAttribute("objects", res);
         return "objectOfBuilder-details";
     }
 
