@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -49,17 +50,17 @@ public class ObjectOfBuilderController {
         if (!objectOfBuilderRepository.existsById(id)) {
             return "redirect:/home";
         }
-
         LastViewObject lastViewObject = new LastViewObject();
+        ObjectOfBuilder object = objectOfBuilderRepository.findById(id).get();
+        lastViewObject.setObjectOfBuilders(object);
+        lastViewObjectRepository.deleteAll();
+        lastViewObjectRepository.save(lastViewObject);
         ObjectOfBuilder obj = new ObjectOfBuilder();
+        List objects = new ArrayList();
+        objects.add(object);
 
 
-
-//        Optional<ObjectOfBuilder> objects = objectOfBuilderRepository.findById(id);
-//        lastViewObject.setObjectOfBuilders(objects);
-//        ArrayList<ObjectOfBuilder> res = new ArrayList<>();
-//        objects.ifPresent(res::add);
-//        model.addAttribute("objects", res);
+        model.addAttribute("objects",objects);
         return "objectOfBuilder-details";
     }
 

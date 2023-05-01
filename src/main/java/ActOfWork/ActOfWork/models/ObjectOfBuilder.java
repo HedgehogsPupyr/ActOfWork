@@ -2,6 +2,7 @@ package ActOfWork.ActOfWork.models;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class ObjectOfBuilder {
@@ -86,4 +87,16 @@ public class ObjectOfBuilder {
         this.architect = architect;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ObjectOfBuilder that = (ObjectOfBuilder) o;
+        return Objects.equals(id, that.id) && Objects.equals(object, that.object) && Objects.equals(customer, that.customer) && Objects.equals(builder, that.builder) && Objects.equals(architect, that.architect);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, object, customer, builder, architect);
+    }
 }

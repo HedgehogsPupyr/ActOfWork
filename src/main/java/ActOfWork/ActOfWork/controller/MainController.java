@@ -26,13 +26,23 @@ public class MainController {
 
     @GetMapping("/")
     public String home ( Model model) {
-        Iterable <ObjectOfBuilder> objects = objectOfBuilderRepository.findAll();
+        List <ObjectOfBuilder> objects = objectOfBuilderRepository.findAll();
         List<LastViewObject> lastViewObjects = lastViewObjectRepository.findAll();
 
         var asd= lastViewObjects.get(0);
-
-
         ObjectOfBuilder objectOfBuilders = asd.getObjectOfBuilders();
+
+        objects.remove(objectOfBuilders);
+
+//        for (int i = 0; i < objects.size(); i++) {
+//            if(objects.get(i).equals(objectOfBuilders)){
+//                objects.remove(i);
+//            }
+//        }
+
+
+
+
         model.addAttribute("history", List.of(objectOfBuilders));
         model.addAttribute("objects", objects);
         return "home";

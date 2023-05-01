@@ -2,8 +2,7 @@ package ActOfWork.ActOfWork.models;
 
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Optional;
+
 
 @Entity
 public class LastViewObject {
@@ -23,12 +22,8 @@ public class LastViewObject {
         this.objectOfBuilders = objectOfBuilders;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setObjectOfBuilders(ObjectOfBuilder objectOfBuilders) {
+        this.objectOfBuilders = objectOfBuilders;
     }
 
     public ObjectOfBuilder getObjectOfBuilders() {
