@@ -1,8 +1,5 @@
 package ActOfWork.ActOfWork.models;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Act {
@@ -47,6 +44,9 @@ public class Act {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne
+    DocumentationSections documentationSections;
 
     private String object, customer, builder, architect;
     private  int number_of_act;
@@ -290,10 +290,10 @@ public class Act {
 
 
     public Act(String object, String customer, String builder, String architect, int number_of_act, String date, String technical_supervision, String builder_face, String builder_supervision, String architect_face, String builder_stroy, String another_face, String builder_short, String job, String project, String material, String docks, String date_start, String date_end, String docks_project, String next_work, String technical_supervision_name, String builder_face_name, String builder_supervision_name, String architect_face_name, String builder_stroy_name, String another_face_name1, String another_face_name2) {
-        this.object = object;
-        this.customer = customer;
-        this.builder = builder;
-        this.architect = architect;
+//        this.object = object;
+//        this.customer = customer;
+//        this.builder = builder;
+//        this.architect = architect;
         this.number_of_act = number_of_act;
         this.date = date;
         this.technical_supervision = technical_supervision;

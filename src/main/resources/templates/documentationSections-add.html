@@ -10,11 +10,20 @@
 <body>
     <header th:insert="blocks/header :: header"> </header>
 
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Раздел архитектурные решения</h1>
-                <a href="/act/add" class="btn btn-primary my-2">Добавить акт</a>
+    <div class="container">
+        <div class="px-4 pt-5 my-5 text-center border-bottom">
+            <h1 class="display-5 fw-bold"> Добавление раздела </h1>
         </div>
+
+        <form action="/documentationSections/add" method="post" enctype="multipart/form-data">
+            <div>
+                <div>
+                    <p>Наименование раздела исполнительной документации: </p>
+                    <p> <textarea class="form-control" aria-label="With textarea" name="nameOfSection" placeholder="Полное наименование"></textarea> </p>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </form>
     </div>
 
 

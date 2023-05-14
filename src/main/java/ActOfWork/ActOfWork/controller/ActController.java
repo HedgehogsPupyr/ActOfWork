@@ -1,7 +1,9 @@
 package ActOfWork.ActOfWork.controller;
 
 import ActOfWork.ActOfWork.models.Act;
+import ActOfWork.ActOfWork.models.ObjectOfBuilder;
 import ActOfWork.ActOfWork.rep.ActRepository;
+import ActOfWork.ActOfWork.rep.ObjectOfBuilderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +13,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+
 
 @Controller
 public class ActController {
 
     @Autowired
     private ActRepository actRepository;
+
+    @Autowired
+    private ObjectOfBuilderRepository objectOfBuilderRepository;
 
     @GetMapping("/act")
     public String ActOfWork(Model model) {
@@ -45,6 +53,8 @@ public class ActController {
                                @RequestParam String builder_supervision_name,@RequestParam String architect_face_name,
                                @RequestParam String builder_stroy_name,@RequestParam  String another_face_name1,
                                @RequestParam String another_face_name2, Model model) {
+
+
 
         Act act = new Act (object,customer, builder, architect, number_of_act, date, technical_supervision, builder_face,
                 builder_supervision, architect_face, builder_stroy, another_face, builder_short, job, project, material,

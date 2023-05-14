@@ -11,21 +11,26 @@
 <body >
     <header th:insert="blocks/header :: header"> </header>
 
-    <div class="px-4 pt-5 my-5 text-center border-bottom">
-    <h1> Список объектов</h1>
-    </div>
 
+    <section class="py-5 text-center container">
+        <div class="col-lg-6 col-md-8 mx-auto">
+        <h1> Список объектов</h1>
+        </div>
+    </section>
 
     <div class="container">
-        <div  class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+
+        <div  class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-2">
+            <div class="h-100 p-4 bg-light border rounded-4">
             <div th:each="el : ${history}" class="col d-flex flex-column align-items-start gap-2">
-                <h3 class="fw-bold">Последний просматриваемый объект</h3>
-                <p th:text="${el.object}" class="text-muted"/>
-                <a href="/objectOfBuilder" class="btn btn-primary btn-lg">Подробнее</a>
+                <h4 class="fw-bold">Последний просматриваемый объект</h4>
+                <h2 th:text="${el.object}" class="text-muted"/>
+                <a th:href="'/objectOfBuilder/'+${el.id}" class="btn btn-primary btn-lg">Подробнее</a>
+            </div>
             </div>
 
             <div  class="col">
-                <div class="row row-cols-1 row-cols-sm-2 g-4">
+                <div class="row row-cols-1 row-cols-sm-2 g-4 py-4">
                     <div th:each="el : ${objects}" class="col d-flex flex-column gap-2">
                         <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">

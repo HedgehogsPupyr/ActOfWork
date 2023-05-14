@@ -2,7 +2,10 @@ package ActOfWork.ActOfWork.models;
 
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class ObjectOfBuilder {
@@ -13,8 +16,10 @@ public class ObjectOfBuilder {
     private String object, customer, builder, architect;
 
 
+
     public ObjectOfBuilder(String object, String customer, String builder, String architect) {
     }
+
 
     public ObjectOfBuilder() {
     }
@@ -36,10 +41,11 @@ public class ObjectOfBuilder {
         this.architect = architect;
     }
 
+
+
     @Override
     public String toString() {
         return "ObjectOfBuilder{" +
-                "id=" + id +
                 ", object='" + object + '\'' +
                 ", customer='" + customer + '\'' +
                 ", builder='" + builder + '\'' +
@@ -86,6 +92,8 @@ public class ObjectOfBuilder {
     public void setArchitect(String architect) {
         this.architect = architect;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
