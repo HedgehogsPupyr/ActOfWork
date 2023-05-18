@@ -24,6 +24,18 @@ public class DocumentationSections {
 
     }
 
+    public DocumentationSections(String nameOfSection, ObjectOfBuilder objectOfBuilder) {
+        this.nameOfSection = nameOfSection;
+        this.objectOfBuilder = objectOfBuilder;
+    }
+
+    public ObjectOfBuilder getObjectOfBuilder() {
+        return objectOfBuilder;
+    }
+
+    public void setObjectOfBuilder(ObjectOfBuilder objectOfBuilder) {
+        this.objectOfBuilder = objectOfBuilder;
+    }
 
     public Long getId() {
         return id;

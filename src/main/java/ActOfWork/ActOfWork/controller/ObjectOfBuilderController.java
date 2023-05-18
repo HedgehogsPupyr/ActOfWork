@@ -33,13 +33,13 @@ public class ObjectOfBuilderController {
 
 
 
-    @GetMapping("/objectOfBuilder/{id}")
-    public String objectOfBuilderDetails (@PathVariable(value = "id") long id, Model model) {
-        if (!objectOfBuilderRepository.existsById(id)) {
+    @GetMapping("/objectOfBuilder/{idObject}")
+    public String objectOfBuilderDetails (@PathVariable(value = "idObject") long idObject, Model model) {
+        if (!objectOfBuilderRepository.existsById(idObject)) {
             return "redirect:/home";
         }
         LastViewObject lastViewObject = new LastViewObject();
-        ObjectOfBuilder object = objectOfBuilderRepository.findById(id).get();
+        ObjectOfBuilder object = objectOfBuilderRepository.findById(idObject).get();
         lastViewObject.setObjectOfBuilders(object);
         lastViewObjectRepository.deleteAll();
         lastViewObjectRepository.save(lastViewObject);

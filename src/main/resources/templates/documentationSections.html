@@ -10,23 +10,10 @@
 <body>
     <header th:insert="blocks/header :: header"> </header>
 
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Разделы докуемнтации</h1>
-                <a href="/objectOfBuilder/{id}/documentationSections/add" class="btn btn-primary my-2">Добавить раздел</a>
-        </div>
-    </div>
-    <div th:each="el : ${docSection}" class=" alert alert-info mt-2">
-        <h3 th:text="${el.nameOfSection}"/>
-        <a th:href="'/act/'+${el.id}" class="btn btn-warning"> Подробнее</a>
-    </div>
-
-
-
-
-
+<h1> ЭТО ТУТ ДОЛЖНА БЫТЬ</h1>
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div th:insert="blocks/footer :: footer"> </div>
+
     </footer>
 </body>
 

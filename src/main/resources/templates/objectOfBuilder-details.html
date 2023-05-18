@@ -42,8 +42,9 @@
     </div>
 
     <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <a href="/documentationSections/add" class="btn btn-primary my-2">Добавить раздел</a>
+        <div th:each="el : ${objects}" class="col-lg-6 col-md-8 mx-auto">
+            <a th:href="'/objectOfBuilder/'+${el.id} +'/documentationSections/add'" class="btn btn-warning"> Подробнее </a>
+<!--            <a href="objectOfBuilder/{idObject}/documentationSections/add" class="btn btn-primary my-2">Добавить раздел</a>-->
         </div>
     </div>
 
