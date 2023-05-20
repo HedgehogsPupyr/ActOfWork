@@ -34,15 +34,6 @@ public class MainController {
 
         objects.remove(objectOfBuilders);
 
-//        for (int i = 0; i < objects.size(); i++) {
-//            if(objects.get(i).equals(objectOfBuilders)){
-//                objects.remove(i);
-//            }
-//        }
-
-
-
-
         model.addAttribute("history", List.of(objectOfBuilders));
         model.addAttribute("objects", objects);
         return "home";

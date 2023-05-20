@@ -39,16 +39,25 @@ public class ObjectOfBuilderController {
             return "redirect:/home";
         }
         LastViewObject lastViewObject = new LastViewObject();
-        ObjectOfBuilder object = objectOfBuilderRepository.findById(idObject).get();
-        lastViewObject.setObjectOfBuilders(object);
-        lastViewObjectRepository.deleteAll();
-        lastViewObjectRepository.save(lastViewObject);
+        ObjectOfBuilder object = objectOfBuilderRepository.findById(idObject).get();// тут и далее
+        lastViewObject.setObjectOfBuilders(object);  // логика добавления
+        lastViewObjectRepository.deleteAll();   // последнего просматриваемого объекта
+        lastViewObjectRepository.save(lastViewObject); // с высоводом на экран
         List objects = new ArrayList();
         objects.add(object);
-        List <DocumentationSections> docSection = documentationSectionsRepository.findAll();
-        model.addAttribute("docSection", docSection);
-        model.addAttribute("objects",objects);
+        List <DocumentationSections> tryToFindAllSection = documentationSectionsRepository.findAllByObjectOfBuilderId(idObject);
+        model.addAttribute("listDocSection", tryToFindAllSection);
+        model.addAttribute("objects",object);
         return "objectOfBuilder-details";
     }
+
+    //    @PostMapping("/objectOfBuilder/{idObject}/documentationSections/remove")
+//    public String ActPostRemove ( @PathVariable(value = "id") long id, Model model) {
+//        Act act = actRepository.findById(id).orElseThrow();
+//        actRepository.delete(act);
+//        return "redirect:/objectOfBuilder-details";
+//    }
+
+
 
 }

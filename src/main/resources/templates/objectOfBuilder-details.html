@@ -23,7 +23,7 @@
         <h2 class="pb-2 border-bottom">Разделы исполнительной документации</h2>
 
         <div  class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-            <div th:each="el : ${docSection}" class="col">
+            <div th:each="el : ${listDocSection}" class="col">
                 <div  class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
                     <div  class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                         <h3 th:text="${el.nameOfSection}" class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"/>
@@ -34,6 +34,11 @@
                             <li class="d-flex align-items-center me-3">
                                 <a th:href="'/act/'+${el.id}" > Подробнее</a>
                             </li>
+                            <li class="d-flex align-items-center me-3">
+                                <form th:action="'/objectOfBuilder/'+${el.id} +'/documentationSections/remove'" method="post">
+                                    <button type="submit">Удалить</button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -42,9 +47,8 @@
     </div>
 
     <div class="row py-lg-5">
-        <div th:each="el : ${objects}" class="col-lg-6 col-md-8 mx-auto">
-            <a th:href="'/objectOfBuilder/'+${el.id} +'/documentationSections/add'" class="btn btn-warning"> Подробнее </a>
-<!--            <a href="objectOfBuilder/{idObject}/documentationSections/add" class="btn btn-primary my-2">Добавить раздел</a>-->
+        <divclass="col-lg-6 col-md-8 mx-auto">
+            <a th:href="'/objectOfBuilder/'+${objects.id} +'/documentationSectionsAdd'" class="btn btn-warning"> Добавить новый раздел </a>
         </div>
     </div>
 

@@ -48,6 +48,14 @@ public class Act {
     @ManyToOne
     DocumentationSections documentationSections;
 
+    public DocumentationSections getDocumentationSections() {
+        return documentationSections;
+    }
+
+    public void setDocumentationSections(DocumentationSections documentationSections) {
+        this.documentationSections = documentationSections;
+    }
+
     private String object, customer, builder, architect;
     private  int number_of_act;
     private String date;
@@ -322,6 +330,9 @@ public class Act {
 
     public Act() {
     }
+
+
+
 }
 
 

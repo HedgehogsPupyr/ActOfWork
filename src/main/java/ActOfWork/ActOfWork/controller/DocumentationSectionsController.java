@@ -1,6 +1,7 @@
 package ActOfWork.ActOfWork.controller;
 
 
+import ActOfWork.ActOfWork.models.Act;
 import ActOfWork.ActOfWork.models.DocumentationSections;
 import ActOfWork.ActOfWork.models.ObjectOfBuilder;
 import ActOfWork.ActOfWork.rep.DocumentationSectionsRepository;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping (value = "/objectOfBuilder/{idObject}")
 @Controller
 public class DocumentationSectionsController {
 
@@ -21,8 +23,8 @@ public class DocumentationSectionsController {
     @Autowired
     private ObjectOfBuilderRepository objectOfBuilderRepository;
 
-//    @RequestMapping (value = "/objectOfBuilder/{idObject}")
-    @GetMapping("/objectOfBuilder/{idObject}/documentationSections")
+
+    @GetMapping("/documentationSections")
     public String documentationSections (@PathVariable(value = "idObject") Long idObject, Model model) {
 
 
@@ -31,21 +33,29 @@ public class DocumentationSectionsController {
         return "documentationSections";
     }
 
-    @GetMapping("/objectOfBuilder/{idObject}/documentationSections/add")
+    @GetMapping("/documentationSectionsAdd")
     public String ActAdd (@PathVariable (value = "idObject") Long idObject, Model model) {
-        List <ObjectOfBuilder> objectsForAdd = objectOfBuilderRepository.findAll();
-        model.addAttribute("objectsForAdd", objectsForAdd);
+        ObjectOfBuilder objectOfBuilder = objectOfBuilderRepository.findById(idObject).get();
+        model.addAttribute("objectOfBuilder", objectOfBuilder);
         return "documentationSections-add";
     }
 
-    @PostMapping("/objectOfBuilder/{idObject}/documentationSections/add")
+    @PostMapping("/documentationSectionsAdd")
     public String addDocumentationSectionPost(@PathVariable(value = "idObject")  Long idObject, @RequestParam String nameOfSection, Model model){
         ObjectOfBuilder objectOfBuilder = objectOfBuilderRepository.findById(idObject).get();
         DocumentationSections docSection =  new DocumentationSections(nameOfSection);
         docSection.setObjectOfBuilder(objectOfBuilder);
         documentationSectionsRepository.save(docSection);
-        return "redirect:/objectOfBuilder/{idObject}/documentationSections";
+//        model.addAttribute("objectOfBuilder", objectOfBuilder);
+        return "redirect:/objectOfBuilder/{idObject}";
     }
+
+//    @PostMapping("/objectOfBuilder/{idObject}/documentationSections/remove")
+//    public String ActPostRemove ( @PathVariable(value = "id") long id, Model model) {
+//        Act act = actRepository.findById(id).orElseThrow();
+//        actRepository.delete(act);
+//        return "redirect:/objectOfBuilder-details";
+//    }
 
 
 
