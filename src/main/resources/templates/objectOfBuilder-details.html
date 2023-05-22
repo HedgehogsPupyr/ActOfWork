@@ -31,8 +31,8 @@
                             <li class="me-auto">
                                 <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
                             </li>
-                            <li class="d-flex align-items-center me-3">
-                                <a th:href="'/act/'+${el.id}" > Подробнее</a>
+                            <li  class="d-flex align-items-center me-3">
+                                <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}" > Подробнее</a>
                             </li>
                             <li class="d-flex align-items-center me-3">
                                 <form th:action="'/objectOfBuilder/'+${el.id} +'/documentationSections/remove'" method="post">

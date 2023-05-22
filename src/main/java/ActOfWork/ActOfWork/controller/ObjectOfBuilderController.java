@@ -45,6 +45,7 @@ public class ObjectOfBuilderController {
         lastViewObjectRepository.save(lastViewObject); // с высоводом на экран
         List objects = new ArrayList();
         objects.add(object);
+        //поиск всех разделов у которых id объекта совпадает и запись в переменную
         List <DocumentationSections> tryToFindAllSection = documentationSectionsRepository.findAllByObjectOfBuilderId(idObject);
         model.addAttribute("listDocSection", tryToFindAllSection);
         model.addAttribute("objects",object);
