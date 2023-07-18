@@ -14,7 +14,7 @@
     <div th:each="el : ${objects}">
         <section class="py-5 text-center container">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 th:text="${el.object}" class="display-10 fw-bold"/>
+                <h1 th:text="${el.getObject}" class="display-10 fw-bold"/>
             </div>
         </section>
     </div>
@@ -26,7 +26,7 @@
             <div th:each="el : ${listDocSection}" class="col">
                 <div  class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
                     <div  class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                        <h3 th:text="${el.nameOfSection}" class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"/>
+                        <h3 th:text="${el.getNameOfSection}" class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"/>
                         <ul class="d-flex list-unstyled mt-auto">
                             <li class="me-auto">
                                 <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">

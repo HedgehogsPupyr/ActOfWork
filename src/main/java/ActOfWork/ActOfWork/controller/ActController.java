@@ -1,23 +1,22 @@
 package ActOfWork.ActOfWork.controller;
 
 import ActOfWork.ActOfWork.models.Act;
+import ActOfWork.ActOfWork.models.DocumentationSections;
 import ActOfWork.ActOfWork.models.ObjectOfBuilder;
 import ActOfWork.ActOfWork.rep.ActRepository;
+import ActOfWork.ActOfWork.rep.DocumentationSectionsRepository;
 import ActOfWork.ActOfWork.rep.ObjectOfBuilderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-
+@RequestMapping(value = "/objectOfBuilder/{idObject}/documentationSections/{idSection}")
 @Controller
 public class ActController {
 
@@ -25,23 +24,24 @@ public class ActController {
     private ActRepository actRepository;
 
     @Autowired
-    private ObjectOfBuilderRepository objectOfBuilderRepository;
+    private DocumentationSectionsRepository documentationSectionsRepository;
 
     @GetMapping("/act")
-    public String ActOfWork(Model model) {
-        Iterable <Act> acts = actRepository.findAll();
+    public String ActOfWork(@PathVariable long idObject, @PathVariable long idSection, Model model) {
+
+        List <Act> acts = actRepository.findAllByDocumentationSectionsId(idSection);
 
         model.addAttribute("acts", acts);
         return "actofwork";
     }
 
-    @GetMapping("/act/add")
-    public String ActAdd(Model model) {
+    @GetMapping("/actAdd")
+    public String ActAdd(@PathVariable long idObject, @PathVariable long idSection, Model model) {
         return "act-add";
     }
 
-    @PostMapping("/act/add")
-    public String ActPostAdd ( @RequestParam String object, @RequestParam String customer,@RequestParam String builder,
+    @PostMapping("/actAdd")
+    public String ActPostAdd (@PathVariable long idObject, @PathVariable long idSection,  @RequestParam String object, @RequestParam String customer,@RequestParam String builder,
                                @RequestParam String architect, @RequestParam int number_of_act, @RequestParam String date,
                                @RequestParam String technical_supervision, @RequestParam String builder_face,
                                @RequestParam String builder_supervision, @RequestParam String architect_face,
@@ -54,54 +54,54 @@ public class ActController {
                                @RequestParam String builder_stroy_name,@RequestParam  String another_face_name1,
                                @RequestParam String another_face_name2, Model model) {
 
-
-
+        DocumentationSections documentationSections = documentationSectionsRepository.findById(idSection).get();
         Act act = new Act (object,customer, builder, architect, number_of_act, date, technical_supervision, builder_face,
                 builder_supervision, architect_face, builder_stroy, another_face, builder_short, job, project, material,
                 docks, date_start, date_end, docks_project, next_work, technical_supervision_name, builder_face_name,
                 builder_supervision_name, architect_face_name,  builder_stroy_name, another_face_name1, another_face_name2);
+        act.setDocumentationSections(documentationSections);
         actRepository.save(act);
 
         return "redirect:/act";
     }
 
 
-    @GetMapping("/act/{id}")
-    public String ActDetails(@PathVariable(value = "id") long id, Model model) {
-        if (!actRepository.existsById(id)) {
+    @GetMapping("/act/{idAct}")
+    public String ActDetails(@PathVariable long idObject, @PathVariable long idSection, @PathVariable long idAct, Model model) {
+        if (!actRepository.existsById(idAct)) {
             return "redirect:/act";
         }
-        Optional<Act> act = actRepository.findById(id);
+        Optional<Act> act = actRepository.findById(idAct);
         ArrayList<Act> res = new ArrayList<>();
         act.ifPresent(res::add);
         model.addAttribute("act", res);
         return "act-details";
     }
 
-    @GetMapping("/act/{id}/edit")
-    public String ActEdit(@PathVariable(value = "id") long id, Model model) {
-        if (!actRepository.existsById(id)) {
+    @GetMapping("/act/{idAct}/edit")
+    public String ActEdit(@PathVariable long idObject, @PathVariable long idSection, @PathVariable long idAct, Model model) {
+        if (!actRepository.existsById(idAct)) {
             return "redirect:/act";
         }
-        Optional<Act> act = actRepository.findById(id);
+        Optional<Act> act = actRepository.findById(idAct);
         ArrayList<Act> res = new ArrayList<>();
         act.ifPresent(res :: add);
         model.addAttribute("act", res);
         return "act-edit";
     }
 
-    @PostMapping("/act/{id}/edit")
-    public String ActPostUpdate ( @PathVariable(value = "id") long id, @RequestParam  String name, @RequestParam String job, Model model) {
-        Act act = actRepository.findById(id).orElseThrow();
+    @PostMapping("/act/{idAct}/edit")
+    public String ActPostUpdate ( @PathVariable long idObject, @PathVariable long idSection, @PathVariable long idAct, @RequestParam  String name, @RequestParam String job, Model model) {
+        Act act = actRepository.findById(idAct).orElseThrow();
         act.setAnother_face(name);
         act.setJob(job);
         actRepository.save(act);
         return "redirect:/act";
     }
 
-    @PostMapping("/act/{id}/remove")
-    public String ActPostRemove ( @PathVariable(value = "id") long id, Model model) {
-        Act act = actRepository.findById(id).orElseThrow();
+    @PostMapping("/act/{idAct}/remove")
+    public String ActPostRemove ( @PathVariable long idObject, @PathVariable long idSection, @PathVariable long idAct, Model model) {
+        Act act = actRepository.findById(idAct).orElseThrow();
         actRepository.delete(act);
         return "redirect:/act";
     }
