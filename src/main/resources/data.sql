@@ -12,8 +12,6 @@ VALUES
 (2, 'Вентиляция'),
 (3, 'Электроснабжение');
 
-INSERT INTO last_view_object (id, building_id)
-VALUES (1,1);
 
 INSERT INTO object_of_builder (id, object, customer, builder, architect)
 VALUES

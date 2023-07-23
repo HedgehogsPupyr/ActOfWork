@@ -24,14 +24,22 @@ public class ActController {
     private ActRepository actRepository;
 
     @Autowired
+    private ObjectOfBuilderRepository objectOfBuilderRepository;
+
+
+    @Autowired
     private DocumentationSectionsRepository documentationSectionsRepository;
 
     @GetMapping("/act")
     public String ActOfWork(@PathVariable long idObject, @PathVariable long idSection, Model model) {
 
+        ObjectOfBuilder objectOfBuilder = objectOfBuilderRepository.findById(idObject).get();
+        DocumentationSections documentationSections = documentationSectionsRepository.findById(idSection).get();
         List <Act> acts = actRepository.findAllByDocumentationSectionsId(idSection);
-
+        model.addAttribute("docSect",documentationSections);
+        model.addAttribute("objects",objectOfBuilder);
         model.addAttribute("acts", acts);
+
         return "actofwork";
     }
 
@@ -71,6 +79,14 @@ public class ActController {
         if (!actRepository.existsById(idAct)) {
             return "redirect:/act";
         }
+        ObjectOfBuilder objectOfBuilder = objectOfBuilderRepository.findById(idObject).get();
+        DocumentationSections documentationSections = documentationSectionsRepository.findById(idSection).get();
+        List <Act> tryToFindAllActs = actRepository.findAllByDocumentationSectionsId(idSection);
+        List <Act> acts = actRepository.findAllByDocumentationSectionsId(idSection);
+        model.addAttribute("listActSection", tryToFindAllActs);
+        model.addAttribute("docSect",documentationSections);
+        model.addAttribute("objects",objectOfBuilder);
+        model.addAttribute("acts", acts);
         Optional<Act> act = actRepository.findById(idAct);
         ArrayList<Act> res = new ArrayList<>();
         act.ifPresent(res::add);
@@ -83,6 +99,7 @@ public class ActController {
         if (!actRepository.existsById(idAct)) {
             return "redirect:/act";
         }
+
         Optional<Act> act = actRepository.findById(idAct);
         ArrayList<Act> res = new ArrayList<>();
         act.ifPresent(res :: add);

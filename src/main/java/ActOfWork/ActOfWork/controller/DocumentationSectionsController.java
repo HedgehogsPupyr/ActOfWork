@@ -65,10 +65,12 @@ public class DocumentationSectionsController {
         DocumentationSections documentationSections = documentationSectionsRepository.findById(idSection).get();
         List <DocumentationSections> tryToFindAllSection = documentationSectionsRepository.findAllByObjectOfBuilderId(idObject);
         List <Act> acts = actRepository.findAllByDocumentationSectionsId(idSection);
+        List <Act> tryToFindAllActs = actRepository.findAllByDocumentationSectionsId(idSection);
         model.addAttribute("listDocSection", tryToFindAllSection);
         model.addAttribute("docSect",documentationSections);
         model.addAttribute("objects",objectOfBuilder);
         model.addAttribute("acts", acts);
+        model.addAttribute("listAct", tryToFindAllActs);
 
 
 

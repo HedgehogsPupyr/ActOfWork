@@ -29,14 +29,20 @@ public class MainController {
         List <ObjectOfBuilder> objects = objectOfBuilderRepository.findAll();
         List<LastViewObject> lastViewObjects = lastViewObjectRepository.findAll();
 
-        var asd= lastViewObjects.get(0);
-        ObjectOfBuilder objectOfBuilders = asd.getObjectOfBuilders();
+        if (lastViewObjects.size()>0){
+            LastViewObject lastViewObject= lastViewObjects.get(0);
 
-        objects.remove(objectOfBuilders);
+            ObjectOfBuilder lastSawObjectOfBuilders = lastViewObject.getObjectOfBuilders();
+            objects.remove(lastSawObjectOfBuilders);
 
-        model.addAttribute("history", List.of(objectOfBuilders));
-        model.addAttribute("objects", objects);
-        return "home";
+            model.addAttribute("history", List.of(lastSawObjectOfBuilders));
+            model.addAttribute("objects", objects);
+            return "home";
+        }
+        else{
+            model.addAttribute("objects", objects);
+            return "home1";
+        }
 
     }
 

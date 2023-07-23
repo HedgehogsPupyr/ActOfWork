@@ -23,7 +23,7 @@
     <div th:each="el : ${acts}" class=" alert alert-info mt-2">
         <h3 th:text=" 'Акт №'+${el.getNumber_of_act}"/>
         <h3 th:text="${el.getJob}"/>
-<!--        <a th:href="''/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}/act/'+${el.id}" class="btn btn-warning"> Подробнее</a>-->
+        <a th:href="'/objectOfBuilder/'+${el.getDocumentationSections.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getDocumentationSections.getId}+'/act/'+${el.getId}" class="btn btn-warning"> Подробнее</a>
     </div>
 
 <!--    objectOfBuilder/8/documentationSections/108-->

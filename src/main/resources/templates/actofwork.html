@@ -11,6 +11,14 @@
 <body>
     <header th:insert="blocks/header :: header"> </header>
 
+    <div th:each="el : ${docSect}">
+        <section class="py-5 text-center container">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 th:text="${el.getNameOfSection}" class="display-10 fw-bold"/>
+            </div>
+        </section>
+    </div>
+
         <div th:each="el : ${acts}" class=" alert alert-info mt-2">
             <h3 th:text=" 'Акт №'+${el.number_of_act}"/>
             <h3 th:text="${el.job}"/>

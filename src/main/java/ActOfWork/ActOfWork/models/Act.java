@@ -264,6 +264,7 @@ public class Act {
         this.builder_supervision_name = builder_supervision_name;
     }
 
+
     public String getArchitect_face_name() {
         return architect_face_name;
     }
