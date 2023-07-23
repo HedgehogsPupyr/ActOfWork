@@ -22,8 +22,10 @@
 
         <div  class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-2">
             <div class="h-100 p-4 bg-light border rounded-4">
-            <div  class="col d-flex flex-column align-items-start gap-2">
-                <h4 class="fw-bold">Последний просматриваемый объект</h4>
+                <div class="col d-flex flex-column align-items-start gap-2">
+                    <h4 class="fw-bold">Последний просматриваемый объект</h4>
+                    <a href="/objectAdd" class="btn btn-primary btn-lg">Добавить объект</a>
+                </div>
             </div>
 
             <div  class="col">
@@ -41,8 +43,7 @@
                 </div>
             </div>
         </div>
-        <a href="/objectAdd" class="btn btn-primary btn-lg">Добавить объект</a>
-    </div>
+
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div th:insert="blocks/footer :: footer"> </div>
