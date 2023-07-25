@@ -34,8 +34,11 @@
                             <li  class="d-flex align-items-center me-3">
                                 <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}" > Подробнее</a>
                             </li>
+                            <li  class="d-flex align-items-center me-3">
+                                <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}+'/sectionEdit'" > Править</a>
+                            </li>
                             <li class="d-flex align-items-center me-3">
-                                <form th:action="'/objectOfBuilder/'+${el.id} +'/documentationSections/remove'" method="post">
+                                <form th:action="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}+'/remove'" method="post">
                                     <button type="submit">Удалить</button>
                                 </form>
                             </li>

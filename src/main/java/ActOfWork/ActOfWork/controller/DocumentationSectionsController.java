@@ -28,18 +28,8 @@ public class DocumentationSectionsController {
     @Autowired
     private ActRepository actRepository;
 
-
-    @GetMapping("/documentationSections")
-    public String documentationSections (@PathVariable(value = "idObject") long idObject, Model model) {
-
-
-        List <DocumentationSections> docSection = documentationSectionsRepository.findAll();
-        model.addAttribute("docSection", docSection);
-        return "documentationSections";
-    }
-
     @GetMapping("/documentationSectionsAdd")
-    public String ActAdd (@PathVariable (value = "idObject") long idObject, Model model) {
+    public String ActAdd (@PathVariable long idObject, Model model) {
         //передаём объект, id которого получили в запросе, в шаблон, чтоб корректно отработал сам шаблон
         ObjectOfBuilder objectOfBuilder = objectOfBuilderRepository.findById(idObject).get();
         model.addAttribute("objectOfBuilder", objectOfBuilder);
@@ -50,12 +40,45 @@ public class DocumentationSectionsController {
     public String addDocumentationSectionPost(@PathVariable long idObject, @RequestParam String nameOfSection, Model model){
         ObjectOfBuilder objectOfBuilder = objectOfBuilderRepository.findById(idObject).get();
         DocumentationSections docSection =  new DocumentationSections(nameOfSection);
-        //запись id объекта, которое мы получили из адресной строки в таблицу к созданой секции
+        //запись объекта, который мы получили из адресной строки (через idObject) в таблицу к созданому разделу
         docSection.setObjectOfBuilder(objectOfBuilder);
         documentationSectionsRepository.save(docSection);
-//        model.addAttribute("objectOfBuilder", objectOfBuilder);
         return "redirect:/objectOfBuilder/{idObject}";
     }
+
+
+
+
+    @GetMapping("/documentationSections/{idSection}/sectionEdit")
+    public String SectionEdit(@PathVariable long idObject, @PathVariable long idSection, Model model) {
+        if (!documentationSectionsRepository.existsById(idSection)) {
+            return "redirect:/objectOfBuilder/{idObject}";
+        }
+        ObjectOfBuilder objectOfBuilder = objectOfBuilderRepository.findById(idObject).get();
+        DocumentationSections documentationSections = documentationSectionsRepository.findById(idSection).get();
+        model.addAttribute("objectOfBuilder", objectOfBuilder);
+        model.addAttribute("documentationSections", documentationSections);
+        return "documentationSections-edit";
+    }
+
+    @PostMapping("/documentationSections/{idSection}/sectionEdit")
+    public String SectionEdit ( @PathVariable long idObject, @PathVariable long idSection, @RequestParam  String nameOfSection, Model model) {
+        DocumentationSections documentationSections = documentationSectionsRepository.findById(idSection).orElseThrow();
+        documentationSections.setNameOfSection(nameOfSection);
+        documentationSectionsRepository.save(documentationSections);
+        return "redirect:/objectOfBuilder/{idObject}";
+    }
+
+    @PostMapping("/documentationSections/{idSection}/remove")
+    public String SectionRemove ( @PathVariable long idObject, @PathVariable long idSection, Model model) {
+        DocumentationSections documentationSections = documentationSectionsRepository.findById(idSection).orElseThrow();
+        documentationSectionsRepository.delete(documentationSections);
+        return "redirect:/objectOfBuilder/{idObject}";
+    }
+
+
+
+
 
 
     @GetMapping("/documentationSections/{idSection}")
@@ -72,23 +95,8 @@ public class DocumentationSectionsController {
         model.addAttribute("acts", acts);
         model.addAttribute("listAct", tryToFindAllActs);
 
-
-
-
-
         return "documentationSections";
     }
-
-
-
-
-//    @PostMapping("/objectOfBuilder/{idObject}/documentationSections/remove")
-//    public String ActPostRemove ( @PathVariable(value = "id") long id, Model model) {
-//        Act act = actRepository.findById(id).orElseThrow();
-//        actRepository.delete(act);
-//        return "redirect:/objectOfBuilder-details";
-//    }
-
 
 
 }

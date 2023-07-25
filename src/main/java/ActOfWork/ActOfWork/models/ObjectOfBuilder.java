@@ -18,6 +18,10 @@ public class ObjectOfBuilder {
 
 
     public ObjectOfBuilder(String object, String customer, String builder, String architect) {
+        this.object = object;
+        this.customer = customer;
+        this.builder = builder;
+        this.architect = architect;
     }
 
 
@@ -32,16 +36,6 @@ public class ObjectOfBuilder {
         this.architect = architect;
 
     }
-
-    public ObjectOfBuilder(Long id, String object, String customer, String builder, String architect) {
-        this.id = id;
-        this.object = object;
-        this.customer = customer;
-        this.builder = builder;
-        this.architect = architect;
-    }
-
-
 
     @Override
     public String toString() {

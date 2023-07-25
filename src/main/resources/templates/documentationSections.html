@@ -10,7 +10,6 @@
 <body>
     <header th:insert="blocks/header :: header"> </header>
 
-<h1> ЭТО ТУТ ДОЛЖНА БЫТЬ</h1>
     <div th:each="el : ${docSect}">
         <section class="py-5 text-center container">
             <div class="col-lg-6 col-md-8 mx-auto">
@@ -18,19 +17,15 @@
             </div>
         </section>
     </div>
-
-
     <div th:each="el : ${acts}" class=" alert alert-info mt-2">
         <h3 th:text=" 'Акт №'+${el.getNumber_of_act}"/>
         <h3 th:text="${el.getJob}"/>
         <a th:href="'/objectOfBuilder/'+${el.getDocumentationSections.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getDocumentationSections.getId}+'/act/'+${el.getId}" class="btn btn-warning"> Подробнее</a>
     </div>
 
-<!--    objectOfBuilder/8/documentationSections/108-->
 
-<!--    <span><a th:href="''/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}/act/' + '/edit'" class="btn btn-warning mt-1"> Добавить акт</a></span>-->
+<!--    <span th:each="el : ${actss}"><a th:href="'/objectOfBuilder/'+${el.getDocumentationSections.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getDocumentationSections.getId}+'/actAdd'" class="btn btn-warning mt-1"> Добавить акт</a></span>-->
 
-    <a th:href="'/objectOfBuilder/'+${objects.id} +'/actAdd'" class="btn btn-warning"> Добавить акт </a>
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div th:insert="blocks/footer :: footer"> </div>

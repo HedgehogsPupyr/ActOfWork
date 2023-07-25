@@ -16,7 +16,11 @@
         <h1 class="display-5 fw-bold"> Добавление акта </h1>
     </div>
 
-    <form action="/act/add" method="post" enctype="multipart/form-data">
+    <div th:each="el : ${acts}">
+        <a  class="btn btn-warning"> Добавить акт </a>
+
+
+    <form th:action="'/objectOfBuilder/'+${el.getDocumentationSections.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getDocumentationSections.getId}+'/actAdd'" method="post" enctype="multipart/form-data">
         <div>
             <div>
                 <p>Объект капитального строительства: </p>
@@ -114,6 +118,7 @@
         </div>
         <button type="submit" class="btn btn-success"> Отправляем</button>
     </form>
+    </div>
 </div>
 
 <footer class="pt-4 my-md-5 pt-md-5 border-top">

@@ -26,6 +26,10 @@
                 <h4 class="fw-bold">Последний просматриваемый объект</h4>
                 <h2 th:text="${el.object}" class="text-muted"/>
                 <a th:href="'/objectOfBuilder/'+${el.id}" class="btn btn-primary btn-lg">Подробнее</a>
+                <a th:href="'/objectOfBuilder/'+${el.id}+'/objectEdit'" class="btn btn-primary"> Редактировать </a>
+                <form th:action="'/objectOfBuilder/'+${el.id}+'/remove'" method="post">
+                    <button class="btn btn-primary" type="submit">Удалить</button>
+                </form>
             </div>
             </div>
 
@@ -40,6 +44,10 @@
                         <h4 th:text="${el.object}"  class="text-muted" />
                         <p th:text="${el.customer}" class="text-muted"/>
                         <a th:href="'/objectOfBuilder/'+${el.id}" class="btn btn-warning"> Подробнее </a>
+                        <a th:href="'/objectOfBuilder/'+${el.id}+'/objectEdit'" class="btn btn-warning"> Редактировать </a>
+                        <form th:action="'/objectOfBuilder/'+${el.id}+'/remove'" method="post">
+                            <button class="btn btn-warning mt-1" type="submit">Удалить</button>
+                        </form>
                     </div>
                 </div>
             </div>

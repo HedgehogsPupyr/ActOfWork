@@ -52,12 +52,6 @@ public class ObjectOfBuilderController {
         return "objectOfBuilder-details";
     }
 
-    //    @PostMapping("/objectOfBuilder/{idObject}/documentationSections/remove")
-//    public String ActPostRemove ( @PathVariable(value = "id") long id, Model model) {
-//        Act act = actRepository.findById(id).orElseThrow();
-//        actRepository.delete(act);
-//        return "redirect:/objectOfBuilder-details";
-//    }
 
 
 
