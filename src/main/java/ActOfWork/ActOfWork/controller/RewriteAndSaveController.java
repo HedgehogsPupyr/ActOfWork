@@ -14,9 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+
 
 @Controller
 public class RewriteAndSaveController {
@@ -29,13 +34,16 @@ public class RewriteAndSaveController {
 
     @GetMapping(value = "/act/{id}/download2", produces = MediaType.APPLICATION_CBOR_VALUE)
 
-    public ResponseEntity<byte[]> getFile(@PathVariable(value = "id") long id, Model model) throws IOException {
+    public ResponseEntity<byte[]> saveFile(@PathVariable long id) throws IOException {
         Optional<Act> act = actRepository.findById(id);
         ArrayList<Act> res = new ArrayList<>();
         act.ifPresent(res::add);
         byte[] result = changesTempl.rewRiteFile(res);
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s.xlsx",id));
+        Act oneAct = actRepository.findById(id).get() ;
+        int number_of_act = oneAct.getNumber_of_act();
+        String job = "AOCP";
+        responseHeaders.set(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s%s.xlsx",job,number_of_act));
 
         return new ResponseEntity<>(
                 result,

@@ -16,21 +16,20 @@
         <h1 class="display-5 fw-bold"> Добавление акта </h1>
     </div>
 
-    <div th:each="el : ${acts}">
-        <a  class="btn btn-warning"> Добавить акт </a>
+    <div th:each="el : ${docSect}">
 
 
-    <form th:action="'/objectOfBuilder/'+${el.getDocumentationSections.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getDocumentationSections.getId}+'/actAdd'" method="post" enctype="multipart/form-data">
+    <form th:action="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getId}+'/actAdd'" method="post" enctype="multipart/form-data">
         <div>
             <div>
                 <p>Объект капитального строительства: </p>
-                <p> <textarea class="form-control" aria-label="With textarea" name="object" placeholder="Наименование проектной документации, почтовый или строителный адрес объекта капитального строительства"></textarea> </p>
+                <input type="text" th:value="${el.getObjectOfBuilder.getObject}" name="object" class="form-control">
                 <p>Застройщик(технический заказчик, уксплуатирующая организация или региональный оператор): </p>
-                <p> <textarea class="form-control" aria-label="With textarea" name="customer" placeholder="ОГРН, ИНН место нахождения юр.лица и пр."></textarea> </p>
+                <input type="text" th:value="${el.getObjectOfBuilder.getCustomer}" name="customer" class="form-control">
                 <p> Лицо, осуществляющее строительство: </p>
-                <p> <textarea class="form-control" aria-label="With textarea" name="builder" placeholder="ОГРН, ИНН место нахождения юр.лица и пр. "></textarea></p>
+                <input type="text" th:value="${el.getObjectOfBuilder.getBuilder}" name="builder" class="form-control">
                 <p> Лицо, осуществляющее подготовку проектной документации: </p>
-                <p> <textarea class="form-control" aria-label="With textarea" name="architect" placeholder="ОГРН, ИНН место нахождения юр.лица и пр. "></textarea></p>
+                <input type="text" th:value="${el.getObjectOfBuilder.getArchitect}" name="architect" class="form-control">
             </div>
 
 

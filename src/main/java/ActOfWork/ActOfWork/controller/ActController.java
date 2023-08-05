@@ -45,6 +45,12 @@ public class ActController {
 
     @GetMapping("/actAdd")
     public String ActAdd(@PathVariable long idObject, @PathVariable long idSection, Model model) {
+        ObjectOfBuilder objectOfBuilder = objectOfBuilderRepository.findById(idObject).get();
+        DocumentationSections documentationSections = documentationSectionsRepository.findById(idSection).get();
+        model.addAttribute("docSect",documentationSections);
+        model.addAttribute("objects",objectOfBuilder);
+
+
         return "act-add";
     }
 
@@ -70,7 +76,7 @@ public class ActController {
         act.setDocumentationSections(documentationSections);
         actRepository.save(act);
 
-        return "redirect:/act";
+        return "redirect:/objectOfBuilder/{idObject}/documentationSections/{idSection}";
     }
 
 
@@ -97,7 +103,7 @@ public class ActController {
     @GetMapping("/act/{idAct}/edit")
     public String ActEdit(@PathVariable long idObject, @PathVariable long idSection, @PathVariable long idAct, Model model) {
         if (!actRepository.existsById(idAct)) {
-            return "redirect:/act";
+            return "redirect:/objectOfBuilder/{idObject}/documentationSections/{idSection}";
         }
 
         Optional<Act> act = actRepository.findById(idAct);
@@ -113,14 +119,14 @@ public class ActController {
         act.setAnother_face(name);
         act.setJob(job);
         actRepository.save(act);
-        return "redirect:/act";
+        return "redirect:/objectOfBuilder/{idObject}/documentationSections/{idSection}";
     }
 
     @PostMapping("/act/{idAct}/remove")
     public String ActPostRemove ( @PathVariable long idObject, @PathVariable long idSection, @PathVariable long idAct, Model model) {
         Act act = actRepository.findById(idAct).orElseThrow();
         actRepository.delete(act);
-        return "redirect:/act";
+        return "redirect:/objectOfBuilder/{idObject}/documentationSections/{idSection}";
     }
 
 

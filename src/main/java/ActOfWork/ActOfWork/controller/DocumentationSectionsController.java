@@ -46,9 +46,6 @@ public class DocumentationSectionsController {
         return "redirect:/objectOfBuilder/{idObject}";
     }
 
-
-
-
     @GetMapping("/documentationSections/{idSection}/sectionEdit")
     public String SectionEdit(@PathVariable long idObject, @PathVariable long idSection, Model model) {
         if (!documentationSectionsRepository.existsById(idSection)) {
@@ -75,10 +72,6 @@ public class DocumentationSectionsController {
         documentationSectionsRepository.delete(documentationSections);
         return "redirect:/objectOfBuilder/{idObject}";
     }
-
-
-
-
 
 
     @GetMapping("/documentationSections/{idSection}")

@@ -38,7 +38,7 @@ public class MainController {
             ObjectOfBuilder lastSawObjectOfBuilders = lastViewObject.getObjectOfBuilders();
             objects.remove(lastSawObjectOfBuilders);
 
-            model.addAttribute("history", List.of(lastSawObjectOfBuilders));
+            model.addAttribute("history", lastSawObjectOfBuilders);
             model.addAttribute("objects", objects);
             return "home";
         }

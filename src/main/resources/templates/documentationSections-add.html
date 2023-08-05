@@ -17,10 +17,22 @@
         <div th:object="${objectOfBuilder}">
         <form th:action="'/objectOfBuilder/'+${objectOfBuilder.id}+'/documentationSectionsAdd'" method="post" enctype="multipart/form-data">
             <div>
+
+                <div>
+                    <p> <input type="checkbox" name="nameOfSection" value="Отопление">Отопление</p>
+                </div>
+                <div>
+                    <p> <input type="checkbox" name="nameOfSection" value="Водоснабжение">Водоснабжение</p>
+                </div>
+                <div>
+                    <p> <input type="checkbox" name="nameOfSection" value="Электрика">Электрика</p>
+                </div>
+
                 <div>
                     <p>Наименование раздела исполнительной документации: </p>
                     <p> <textarea class="form-control" aria-label="With textarea" name="nameOfSection" placeholder="Полное наименование"></textarea> </p>
                 </div>
+
             </div>
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>
