@@ -45,8 +45,11 @@ public class Act {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     @ManyToOne
-    DocumentationSections documentationSections;
+    private DocumentationSections documentationSections;
+    @ManyToOne
+    private FileDataBase fileDataBase;
 
     public DocumentationSections getDocumentationSections() {
         return documentationSections;
@@ -68,9 +71,6 @@ public class Act {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getObject() {
         return object;
@@ -264,6 +264,13 @@ public class Act {
         this.builder_supervision_name = builder_supervision_name;
     }
 
+    public FileDataBase getFileDataBase() {
+        return fileDataBase;
+    }
+
+    public void setFileDataBase(FileDataBase fileDataBase) {
+        this.fileDataBase = fileDataBase;
+    }
 
     public String getArchitect_face_name() {
         return architect_face_name;
@@ -332,8 +339,78 @@ public class Act {
     public Act() {
     }
 
+    public Act(DocumentationSections documentationSections, FileDataBase fileDataBase, String object, String customer, String builder, String architect, int number_of_act, String date, String technical_supervision, String builder_face, String builder_supervision, String architect_face, String builder_stroy, String another_face, String builder_short, String job, String project, String material, String docks, String date_start, String date_end, String docks_project, String next_work, String technical_supervision_name, String builder_face_name, String builder_supervision_name, String architect_face_name, String builder_stroy_name, String another_face_name1, String another_face_name2) {
+        this.documentationSections = documentationSections;
+        this.fileDataBase = fileDataBase;
+        this.object = object;
+        this.customer = customer;
+        this.builder = builder;
+        this.architect = architect;
+        this.number_of_act = number_of_act;
+        this.date = date;
+        this.technical_supervision = technical_supervision;
+        this.builder_face = builder_face;
+        this.builder_supervision = builder_supervision;
+        this.architect_face = architect_face;
+        this.builder_stroy = builder_stroy;
+        this.another_face = another_face;
+        this.builder_short = builder_short;
+        this.job = job;
+        this.project = project;
+        this.material = material;
+        this.docks = docks;
+        this.date_start = date_start;
+        this.date_end = date_end;
+        this.docks_project = docks_project;
+        this.next_work = next_work;
+        this.technical_supervision_name = technical_supervision_name;
+        this.builder_face_name = builder_face_name;
+        this.builder_supervision_name = builder_supervision_name;
+        this.architect_face_name = architect_face_name;
+        this.builder_stroy_name = builder_stroy_name;
+        this.another_face_name1 = another_face_name1;
+        this.another_face_name2 = another_face_name2;
+    }
 
+    public Act(DocumentationSections documentationSections,
+               String object, String customer, String builder, String architect,
+               int number_of_act, String date, String technical_supervision, String builder_face,
+               String builder_supervision, String architect_face, String builder_stroy,
+               String another_face, String builder_short, String job, String project, String material,
+               String docks, String date_start, String date_end, String docks_project, String next_work,
+               String technical_supervision_name, String builder_face_name, String builder_supervision_name,
+               String architect_face_name, String builder_stroy_name, String another_face_name1, String another_face_name2) {
 
+        this.documentationSections = documentationSections;
+        this.object = object;
+        this.customer = customer;
+        this.builder = builder;
+        this.architect = architect;
+        this.number_of_act = number_of_act;
+        this.date = date;
+        this.technical_supervision = technical_supervision;
+        this.builder_face = builder_face;
+        this.builder_supervision = builder_supervision;
+        this.architect_face = architect_face;
+        this.builder_stroy = builder_stroy;
+        this.another_face = another_face;
+        this.builder_short = builder_short;
+        this.job = job;
+        this.project = project;
+        this.material = material;
+        this.docks = docks;
+        this.date_start = date_start;
+        this.date_end = date_end;
+        this.docks_project = docks_project;
+        this.next_work = next_work;
+        this.technical_supervision_name = technical_supervision_name;
+        this.builder_face_name = builder_face_name;
+        this.builder_supervision_name = builder_supervision_name;
+        this.architect_face_name = architect_face_name;
+        this.builder_stroy_name = builder_stroy_name;
+        this.another_face_name1 = another_face_name1;
+        this.another_face_name2 = another_face_name2;
+    }
 }
 
 

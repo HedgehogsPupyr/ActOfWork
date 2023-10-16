@@ -18,15 +18,41 @@
             </div>
         </section>
     </div>
-
-        <div th:each="el : ${acts}" class=" alert alert-info mt-2">
-            <h3 th:text=" 'Акт №'+${el.number_of_act}"/>
-            <h3 th:text="${el.job}"/>
-            <a th:href="'/act/'+${el.id}" class="btn btn-warning"> Подробнее</a>
+    <!--Таблица с актами-->
+    <div class="container">
+        <div th:each="el : ${docSect}">
+            <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getId}+'/actAdd'" class="btn btn-primary btn-lg">Добавить акт</a>
         </div>
-    <div th:each="el : ${docSect}">-->
-        <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getId}+'/actAdd'" class="btn btn-primary btn-lg">Добавить акт</a>
+        <div class="bd-example-snippet bd-code-snippet">
+            <div class="bd-example m-0 border-0">
+                <table   class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col" >№ Act</th>
+                        <th scope="col">Job</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Actions</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="el : ${acts}">
+                        <td th:text=" 'Акт №'+${el.number_of_act}"></td>
+                        <td th:text="${el.job}"></td>
+                        <td th:text="${el.getDate}"></td>
+                        <td>
+                            <a th:href="'/objectOfBuilder/'+${el.getDocumentationSections.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getDocumentationSections.getId}+'/act/'+${el.id}+'/edit'">Edit</a>
+                            </br>
+                            <a th:href="'/objectOfBuilder/'+${el.getDocumentationSections.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getDocumentationSections.getId}+'/act/'+${el.id}+'/remove'">Remove</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div th:insert="blocks/footer :: footer"> </div>

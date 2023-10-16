@@ -10,14 +10,19 @@
 <body>
     <header th:insert="blocks/header :: header"> </header>
 
+    <!--Заголовок страницы с описанием.-->
     <div th:each="el : ${docSect}">
         <section class="py-5 text-center container">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 th:text="${el.getNameOfSection}" class="display-10 fw-bold"/>
+                <h3 th:text="${el.getNameOfSection}" class="display-10 fw-bold"/>
+                <p class="lead text-body-secondary"> Для удобства использования исполнительная документация разделена на подразделы. Если Вы считаете, что указанных разделов недостаточно, то можете добавить свой подраздел.</p>
+                <p>
+                    <a th:href="'/objectOfBuilder/'+${objects.id} +'/documentationSectionsAdd'" class="btn btn-primary my-2">New subsection</a>
+                </p>
             </div>
         </section>
     </div>
-
+    <!--Отображение тела сайта с разделами-->
     <div  class="album py-5 bg-body-tertiary">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

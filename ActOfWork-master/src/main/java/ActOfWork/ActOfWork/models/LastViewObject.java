@@ -1,6 +1,11 @@
 package ActOfWork.ActOfWork.models;
 
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.SQLDelete;
+
 import javax.persistence.*;
 
 
@@ -12,7 +17,6 @@ public class LastViewObject {
     private Long id;
 
     @OneToOne
-    @JoinColumn (name = "building_id")
     private ObjectOfBuilder objectOfBuilders;
 
     public LastViewObject() {

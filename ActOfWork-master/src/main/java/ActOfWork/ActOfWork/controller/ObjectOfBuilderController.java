@@ -43,7 +43,7 @@ public class ObjectOfBuilderController {
         lastViewObject.setObjectOfBuilders(object);  // логика добавления
         lastViewObjectRepository.deleteAll();   // последнего просматриваемого объекта
         lastViewObjectRepository.save(lastViewObject); // с высоводом на экран
-        List objects = new ArrayList();
+        List <ObjectOfBuilder> objects = new ArrayList<>();
         objects.add(object);
         //поиск всех разделов у которых id объекта совпадает и запись в переменную
         List <DocumentationSections> tryToFindAllSection = documentationSectionsRepository.findAllByObjectOfBuilderId(idObject);

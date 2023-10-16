@@ -32,7 +32,7 @@ public class MainController {
         List <ObjectOfBuilder> objects = objectOfBuilderRepository.findAll();
         List<LastViewObject> lastViewObjects = lastViewObjectRepository.findAll();
 
-        if (lastViewObjects.size()>0){
+        if (!lastViewObjects.isEmpty()){
             LastViewObject lastViewObject= lastViewObjects.get(0);
 
             ObjectOfBuilder lastSawObjectOfBuilders = lastViewObject.getObjectOfBuilders();

@@ -1,6 +1,9 @@
 package ActOfWork.ActOfWork.models;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,6 +18,8 @@ public class ObjectOfBuilder {
     private Long id;
     private String object, customer, builder, architect;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    private LastViewObject lastViewObject;
 
 
     public ObjectOfBuilder(String object, String customer, String builder, String architect) {
@@ -86,6 +91,7 @@ public class ObjectOfBuilder {
     public void setArchitect(String architect) {
         this.architect = architect;
     }
+
 
 
 

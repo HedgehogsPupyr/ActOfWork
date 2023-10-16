@@ -18,12 +18,14 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileSystemStorageService implements StorageService {
 
     private final Path rootLocation;
+
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
@@ -36,6 +38,9 @@ public class FileSystemStorageService implements StorageService {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file.");
+            }
+            if (file.getSize()> 3145728){
+                throw new MaxUploadSizeExceededException(3145728);
             }
             Path destinationFile = this.rootLocation.resolve(
                             Paths.get(file.getOriginalFilename()))

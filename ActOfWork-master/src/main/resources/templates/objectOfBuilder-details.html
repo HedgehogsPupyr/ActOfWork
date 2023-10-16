@@ -11,48 +11,41 @@
 <body>
     <header th:insert="blocks/header :: header"> </header>
 
-    <div th:each="el : ${objects}">
-        <section class="py-5 text-center container">
+    <section class="py-5 text-center container">
+        <div th:each="el : ${objects}" class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 th:text="${el.getObject}" class="display-10 fw-bold"/>
+                <h2 th:text="${el.getObject}"  class="fw-light"> Object</h2>
+                <p class="lead text-body-secondary">Здесь представленны разделы исполнительной документации к объекту строительства. Вы можете создать новый раздел, или воспользоваться шаблоном.</p>
+                <p>
+                    <a th:href="'/objectOfBuilder/'+${objects.id} +'/documentationSectionsAdd'" class="btn btn-primary my-2">New section</a>
+                    <a href="#" class="btn btn-secondary my-2">Select section (#)</a>
+                </p>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
-    <div class="container px-4 py-5" id="custom-cards">
-        <h2 class="pb-2 border-bottom">Разделы исполнительной документации</h2>
-
-        <div  class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-            <div th:each="el : ${listDocSection}" class="col">
-                <div  class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-                    <div  class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                        <h3 th:text="${el.getNameOfSection}" class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"/>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <li class="me-auto">
-                                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                            </li>
-                            <li  class="d-flex align-items-center me-3">
-                                <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}" > Подробнее</a>
-                            </li>
-                            <li  class="d-flex align-items-center me-3">
-                                <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}+'/sectionEdit'" > Править</a>
-                            </li>
-                            <li class="d-flex align-items-center me-3">
-                                <form th:action="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}+'/remove'" method="post">
-                                    <button type="submit">Удалить</button>
-                                </form>
-                            </li>
-                        </ul>
+    <div   class="album py-5 bg-body-tertiary">
+        <div  class="container">
+            <div  class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div th:each="el : ${listDocSection}" class="col">
+                    <div  class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text th:text="${el.getNameOfSection}" x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <div  class="card-body">
+                            <p class="card-text">Описание раздела исполнительной документации</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}" class="btn btn-sm btn-outline-secondary" >View</a>
+                                    <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}+'/sectionEdit'" class="btn btn-sm btn-outline-secondary" > Edit</a>
+                                    <form th:action="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.id}+'/remove'" method="post">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary" >Delete</button>
+                                    </form>
+                                </div>
+                                <small class="text-body-secondary">#</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-    <div class="row py-lg-5">
-        <divclass="col-lg-6 col-md-8 mx-auto">
-            <a th:href="'/objectOfBuilder/'+${objects.id} +'/documentationSectionsAdd'" class="btn btn-warning"> Добавить новый раздел </a>
         </div>
     </div>
 

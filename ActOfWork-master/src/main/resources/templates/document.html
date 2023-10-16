@@ -8,43 +8,82 @@
 </head>
 
 <body>
-<header th:insert="blocks/header :: header"> </header>
-<!--Получаем имя раздела проектной документации-->
-<div th:each="el : ${docSect}">
-    <section class="py-5 text-center container">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 th:text="${el.getNameOfSection}" class="display-10 fw-bold"/>
-        </div>
-    </section>
-</div>
+    <header th:insert="blocks/header :: header"> </header>
 
-        <div th:if="${message}">
-            <h2 th:text="${message}"/>
+    <div class="container col-xxl-8 px-4 py-5">
+        <div th:each="el : ${docSect}" class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <div>
+                    <!--Получаем имя раздела проектной документации-->
+                    <section class="py-5 text-center container">
+                        <div class="col-lg-6 col-md-8 mx-auto">
+                            <h1 th:text="${el.getNameOfSection}" class="text-body-emphasis"/>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <!--Получаем информацию об объекте строительства-->
+                <h3 class="text-body-emphasis" data-th-text="${el.getObjectOfBuilder.getObject}">Объект строительства</h3>
+                <p class="lead text-body-secondary" data-th-text="'Адрес объекта строительства: ' + ${el.getObjectOfBuilder.getObject}" >Адрес объекта</p>
+                <p class="lead text-body-secondary" data-th-text="'Заказчик: ' + ${el.getObjectOfBuilder.getCustomer}" >Заказчик</p>
+                <p class="lead text-body-secondary" data-th-text="'Лицо, осуществляющее строительство: ' + ${el.getObjectOfBuilder.getBuilder}">Строитель</p>
+                <p class="lead text-body-secondary" data-th-text="'Лицо, выполневшее подготовку проектной документации: ' + ${el.getObjectOfBuilder.getArchitect}">Проектировщик</p>
+                </div>
         </div>
+    </div>
 
+
+
+
+    <!--    Таблица с материалами-->
+    <div class="container">
         <div th:each="el : ${docSect}" >
-            <form method="post" enctype="multipart/form-data" th:action="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getId}+'/document'">
-                <table>
-                    <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-                    <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+            <a th:href="'/objectOfBuilder/'+${el.getObjectOfBuilder.getId}+'/documentationSections/'+${el.getId}+'/documentAdd'" class="btn btn-primary my-2"> New document</a>
+        </div>
+        <div class="bd-example-snippet bd-code-snippet">
+            <div class="bd-example m-0 border-0">
+                <table   class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Document</th>
+                            <th scope="col">Valid until</th>
+                            <th scope="col">Actions</th>
+                            <th scope="col">Add Act</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="el : ${files}">
+                            <td th:text="${el.getMaterialName}"></td>
+                            <td <p th:text="${el.getPasportName}"></td>
+                            <td th:text="${el.getPasportDate}"></td>
+                            <td>
+                                <ul>
+                                    <!-- data-th-{атрибут} форма записи Thymeleaf для HTML5 (вместо th:each = ....)-->
+                                    <li data-th-each="file:${files}">
+                                        <a th:href="${file}" th:text="${file.getNameFile}"></a>
+                                    </li>
+                                </ul>
+                            </td>
+<!--                            <td>-->
+<!--                                <form >-->
+<!--                                    <select multiple th:each = "el:${acts}">-->
+<!--                                        <option  th:value = "el.number_of_act" > <p th:text = "el.number_of_act"></p> </option>-->
+<!--                                        <button type="submit" class="btn btn-success"> Send</button>-->
+<!--                                    </select>-->
+<!--                                </form>-->
+<!--                            </td>-->
+                        </tr>
+                    </tbody>
                 </table>
-            </form>
+            </div>
         </div>
+    </div>
 
-        <div>
-            <ul>
-                <li th:each="file : ${files}">
-                    <a th:href="${file}" th:text="${file}" />
-                </li>
-            </ul>
-        </div>
-
-
-
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div th:insert="blocks/footer :: footer"> </div>
 </footer>
 
 </body>
-
 </html>
